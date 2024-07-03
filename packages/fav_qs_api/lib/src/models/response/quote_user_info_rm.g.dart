@@ -7,20 +7,8 @@ part of 'quote_user_info_rm.dart';
 // **************************************************************************
 
 QuoteUserInfoRM _$QuoteUserInfoRMFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'QuoteUserInfoRM',
-      json,
-      ($checkedConvert) {
-        final val = QuoteUserInfoRM(
-          isFavorite: $checkedConvert('favorite', (v) => v as bool),
-          isUpvoted: $checkedConvert('upvote', (v) => v as bool),
-          isDownvoted: $checkedConvert('downvote', (v) => v as bool),
-        );
-        return val;
-      },
-      fieldKeyMap: const {
-        'isFavorite': 'favorite',
-        'isUpvoted': 'upvote',
-        'isDownvoted': 'downvote'
-      },
+    QuoteUserInfoRM(
+      isFavorite: json['favorite'] as bool,
+      isUpvoted: json['upvote'] as bool,
+      isDownvoted: json['downvote'] as bool,
     );
