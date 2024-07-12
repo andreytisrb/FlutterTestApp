@@ -10,14 +10,14 @@ class AnalyticsService {
   final FirebaseAnalytics _analytics;
 
   Future<void> setCurrentScreen(String screenName) {
-    return _analytics.setCurrentScreen(
+    return _analytics.logScreenView(
       screenName: screenName,
     );
   }
 
   Future<void> logEvent({
     required String name,
-    Map<String, Object?>? parameters,
+    Map<String, Object>? parameters,
   }) {
     return _analytics.logEvent(
       name: name,
