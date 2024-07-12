@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "735536656410",
+    "project_id": "testflutproj",
+    "storage_bucket": "testflutproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735536656410:android:e38d74acb65eacc5b0e1a3",
+        "android_client_info": {
+          "package_name": "com.raywenderlich.wonder_words"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735536656410-2bupos9jb97ahgja9bq629uvhfc81ebf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7AUIlP4ZJInAmZy9swbu8FA6Qh7_5pN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735536656410-2bupos9jb97ahgja9bq629uvhfc81ebf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "735536656410-4m0tseaknaa0p6updo0d679klcke69m6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.raywenderlich.wonderWords"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735536656410:android:7431312db7277d4bb0e1a3",
+        "android_client_info": {
+          "package_name": "example.agrok.com.flutter_test_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735536656410-2bupos9jb97ahgja9bq629uvhfc81ebf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7AUIlP4ZJInAmZy9swbu8FA6Qh7_5pN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735536656410-2bupos9jb97ahgja9bq629uvhfc81ebf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "735536656410-4m0tseaknaa0p6updo0d679klcke69m6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.raywenderlich.wonderWords"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
