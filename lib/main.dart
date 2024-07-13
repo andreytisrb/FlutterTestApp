@@ -6,6 +6,7 @@ import 'package:domain_models/domain_models.dart';
 import 'package:fav_qs_api/fav_qs_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test_app/firebase_options.dart';
 import 'package:flutter_test_app/l10n/app_localizations.dart';
 import 'package:flutter_test_app/routing_table.dart';
 import 'package:flutter_test_app/screen_view_observer.dart';
@@ -30,7 +31,7 @@ void main() async {
   runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await initializeMonitoringPackage();
+      await initializeMonitoringPackage(DefaultFirebaseOptions.currentPlatform);
 
       final remoteValueService = RemoteValueService();
       await remoteValueService.load();

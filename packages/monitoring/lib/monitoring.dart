@@ -6,4 +6,6 @@ export 'src/error_reporting_service.dart';
 export 'src/explicit_crash.dart';
 export 'src/remote_value_service.dart';
 
-Future<void> initializeMonitoringPackage() => Firebase.initializeApp();
+Future<void> initializeMonitoringPackage(FirebaseOptions? options) => Firebase.initializeApp(
+  options: options,
+);
