@@ -21,32 +21,36 @@ import 'package:sign_in/sign_in.dart';
 import 'package:sign_up/sign_up.dart';
 import 'package:update_profile/update_profile.dart';
 import 'package:user_repository/user_repository.dart';
+import 'dart:io' show Platform;
 
 
 void main() async {
   // Has to be late so it doesn't instantiate before the
   // `initializeMonitoringPackage()` call.
-  late final errorReportingService = ErrorReportingService();
+  late final errorReportingService =
+      ErrorReportingService.getErrorReportingService(!isWeb());
 
   runZonedGuarded<Future<void>>(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await initializeMonitoringPackage(DefaultFirebaseOptions.currentPlatform);
+      await initializeMonitoringPackage(!isWeb());
 
-      final remoteValueService = RemoteValueService();
+      final remoteValueService = RemoteValueService.getService(isWeb());
       await remoteValueService.load();
 
       FlutterError.onError = errorReportingService.recordFlutterError;
 
-      Isolate.current.addErrorListener(
-        RawReceivePort((pair) async {
-          final List<dynamic> errorAndStacktrace = pair;
-          await errorReportingService.recordError(
-            errorAndStacktrace.first,
-            errorAndStacktrace.last,
-          );
-        }).sendPort,
-      );
+      if(!isWeb()) {
+        Isolate.current.addErrorListener(
+          RawReceivePort((pair) async {
+            final List<dynamic> errorAndStacktrace = pair;
+            await errorReportingService.recordError(
+              errorAndStacktrace.first,
+              errorAndStacktrace.last,
+            );
+          }).sendPort,
+        );
+      }
 
       runApp(
         WonderWords(
@@ -76,8 +80,13 @@ class WonderWords extends StatefulWidget {
 
 class WonderWordsState extends State<WonderWords> {
   final _keyValueStorage = KeyValueStorage();
-  final _analyticsService = AnalyticsService();
-  final _dynamicLinkService = DynamicLinkService();
+  late AnalyticsService _analyticsService;
+  final _dynamicLinkService = DynamicLinkService.getService(isWeb());
+
+  WonderWordsState() {
+    _analyticsService = AnalyticsService.getAnalyticsService(!isWeb());
+  }
+
   late final _favQsApi = FavQsApi(
     userTokenSupplier: () => _getToken(),
   );
@@ -89,7 +98,7 @@ class WonderWordsState extends State<WonderWords> {
     remoteApi: _favQsApi,
     noSqlStorage: _keyValueStorage,
   );
-  
+
   late final _routerDelegate = RoutemasterDelegate(
     observers: [
       ScreenViewObserver(
@@ -112,13 +121,15 @@ class WonderWordsState extends State<WonderWords> {
       ),
     );
   }
+
   final _lightTheme = LightWonderThemeData();
   final _darkTheme = DarkWonderThemeData();
   late StreamSubscription _incomingDynamicLinksSubscription;
 
-  Future<String?> _getToken(){
+  Future<String?> _getToken() {
     return _userRepository.getUserToken();
   }
+
   @override
   void initState() {
     super.initState();
@@ -194,4 +205,18 @@ extension on DarkModePreference {
         return ThemeMode.dark;
     }
   }
+}
+
+bool isWeb() {
+  bool kisweb;
+  try {
+    if (Platform.isAndroid || Platform.isIOS) {
+      kisweb = false;
+    } else {
+      kisweb = true;
+    }
+  } catch (e) {
+    kisweb = true;
+  }
+  return kisweb;
 }
